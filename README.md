@@ -183,16 +183,20 @@ The VR game logic and environment were implemented using the **Godot Engine**, t
 ### 🧠 Development Process
 
 1. **Maze Design**  
-   - Created **three unique 3D mazes**...
+   - Created **three unique 3D mazes**, each with distinct obstacles and increasing levels of difficulty.  
+   - Designed to challenge the user’s spatial awareness and precision in tilt control.
 
 2. **Control Prototyping**  
-   ...
+   - Initially enabled maze control using **keyboard input** (arrow keys or WASD).  
+   - This allowed rapid gameplay prototyping and testing of physics interactions.
 
 3. **Hardware Integration**  
-   ...
+   - Replaced keyboard controls with **real-time tilt data** from the physical controller (ESP32 + ADXL345).  
+   - Mapped pitch and roll values to maze rotation in the virtual environment.
 
 4. **VR Deployment**  
-   ...
+   - Integrated the system into a **VR experience** using a Meta Quest headset and Godot’s OpenXR plugin.  
+   - The player now navigates the maze through natural hand tilting, with real-time feedback in a fully immersive VR setting.
 
 📄 [View full Godot VR game logic (game_manager.gd)](Godot%20VR%20Implementation/game_manager.gd)
 
@@ -245,6 +249,32 @@ ros2 run bip_package calibrate_sensor
 ---
 
 ## 🔄 Data Flow  
+
+This section outlines the full path of data from physical motion to virtual gameplay, demonstrating the integration between hardware, middleware, and the VR application.
+
+### 📡 Sensor → ESP32 → ROS 2 + Godot
+
+1. **Motion Capture (ADXL345 Accelerometer)**  
+   - The accelerometer detects tilt along the X, Y, and Z axes.
+   - Raw sensor data is smoothed using a circular buffer and moving average filter on the ESP32.
+
+2. **Orientation Calculation (ESP32)**  
+   - Pitch and roll angles are calculated from the filtered data.
+   - These values are normalized and packed into a custom BLE HID report format.
+
+3. **Wireless Transmission (BLE HID Protocol)**  
+   - The ESP32 sends the pitch and roll data via Bluetooth Low Energy.
+   - BLE HID emulates a gamepad to allow seamless communication with devices like VR headsets or computers.
+
+4. **Dual Data Usage**  
+   - **Godot Engine:** Interprets the BLE joystick axes to rotate the virtual maze in real time.
+   - **ROS 2:** A separate Python node receives serial data from the ESP32 (via USB) and publishes it as ROS messages to the `/accel_data` topic for real-time plotting, logging, and analysis.
+
+5. **Game Logic (Godot)**  
+   - The Godot VR application uses tilt data to rotate the maze.
+   - Player progression (coin collection or falling) is handled in a scene controller script, which changes levels accordingly.
+
+### 🔁 Summary Diagram (Textual)
 
 --- 
 
