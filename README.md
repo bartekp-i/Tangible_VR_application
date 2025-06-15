@@ -178,6 +178,24 @@ ros2 bag play <bag_name>
 
 ## 🎮 Godot VR Implementation  
 
+The VR game logic and environment were implemented using the **Godot Engine**, taking full advantage of its physics system and OpenXR support.
+
+### 🧠 Development Process
+
+1. **Maze Design**  
+   - Created **three unique 3D mazes**...
+
+2. **Control Prototyping**  
+   ...
+
+3. **Hardware Integration**  
+   ...
+
+4. **VR Deployment**  
+   ...
+
+📄 [View full Godot VR game logic (game_manager.gd)](Godot%20VR%20Implementation/game_manager.gd)
+
 
 ---
 
