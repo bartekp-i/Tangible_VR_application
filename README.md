@@ -177,7 +177,25 @@ ros2 bag play <bag_name>
 ---
 
 ## 🎮 Godot VR Implementation  
+The VR game logic and environment were implemented using the **Godot Engine**, taking full advantage of its physics system and OpenXR support.
 
+### 🧠 Development Process
+
+1. **Maze Design**  
+   - Created **three unique 3D mazes**, each with distinct obstacles and increasing levels of difficulty.  
+   - Designed to challenge the user’s spatial awareness and precision in tilt control.
+
+2. **Control Prototyping**  
+   - Initially enabled maze control using **keyboard input** (arrow keys or WASD).  
+   - This allowed rapid gameplay prototyping and testing of physics interactions.
+
+3. **Hardware Integration**  
+   - Replaced keyboard controls with **real-time tilt data** from the physical controller (ESP32 + ADXL345).  
+   - Mapped pitch and roll values to maze rotation in the virtual environment.
+
+4. **VR Deployment**  
+   - Integrated the system into a **VR experience** using a Meta Quest headset and Godot’s OpenXR plugin.  
+   - The player now navigates the maze through natural hand tilting, with real-time feedback in a fully immersive VR setting.
 
 ---
 
